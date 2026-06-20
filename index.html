@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Робоча інструкція: Санітарна обробка синіх накопичувачів</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; /* Синій професійний */
+            --accent-color: #eef6fc;
+            --text-color: #333;
+            --warning-bg: #fff3cd;
+            --warning-text: #856404;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 210mm; /* Ширина А4 */
+            margin: 20px auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        /* Заголовок з Логотипом */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .header-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin: 10px 0 0;
+            font-weight: normal;
+            color: #555;
+        }
+
+        /* Секції */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .info-block h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Етапи */
+        .step {
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            page-break-inside: avoid; /* Щоб етап не розривався при друці */
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 10px;
+        }
+
+        .performers {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .sub-step {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        
+        .sub-step-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Попередження */
+        .warning-box {
+            background-color: var(--warning-bg);
+            color: var(--warning-text);
+            padding: 15px;
+            border-left: 5px solid #ffeeba;
+            margin: 15px 0;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .placeholder {
+            background-color: #ffff00;
+            padding: 2px 5px;
+            border: 1px dashed #999;
+        }
+
+        /* Таблиця підписів */
+        .signatures {
+            margin-top: 50px;
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        .signatures th, .signatures td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .signatures th {
+            background-color: #f9f9f9;
+            width: 30%;
+        }
+
+        .sign-line {
+            display: inline-block;
+            width: 100%;
+            border-bottom: 1px solid #000;
+            height: 20px;
+        }
+
+        .date-block {
+            margin-top: 30px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        /* Кнопка друку */
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Стилі для друку */
+        @media print {
+            body {
+                background-color: white;
+                font-size: 12pt;
+            }
+            .container {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            .print-btn {
+                display: none;
+            }
+            .step {
+                page-break-inside: avoid;
+            }
+            h1 {
+                font-size: 18pt;
+            }
+            header {
+                justify-content: flex-start;
+            }
+            .logo {
+                max-width: 100px;
+                margin-right: 20px;
+            }
+            .header-text {
+                text-align: left;
+            }
+            .warning-box {
+                border: 1px solid #000;
+                background: #fff;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 15px;
+            }
+            .logo {
+                margin-bottom: 15px;
+            }
+            .step-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .performers {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print(); return false;" class="print-btn">🖨️ Роздрукувати інструкцію</a>
+
+    <div class="container">
+        <header>
+            <!-- Місце для Логотипу -->
+            <img src="https://foodline-production.com/wp-content/uploads/2021/10/3752781497_3752781497.webp" alt="Логотип" class="logo">
+            
+            <div class="header-text">
+                <h1>Робоча Інструкція</h1>
+                <h2>З санітарної обробки (миття та дезінфекції) 2-х синіх накопичувачів по 4 м³</h2>
+            </div>
+        </header>
+
+        <section class="info-grid">
+            <div class="info-block">
+                <h3>Об’єкти миття</h3>
+                <ul>
+                    <li><strong>Сині накопичувальні баки:</strong> 2 шт. (об'єм 4000 л кожен).</li>
+                    <li><strong>Деталі ємностей:</strong> Люки, поплавки.</li>
+                </ul>
+            </div>
+            <div class="info-block">
+                <h3>Відповідальний персонал</h3>
+                <ul>
+                    <li><strong>Контролер якості</strong></li>
+                    <li><strong>Механік цеху</strong></li>
+                    <li><strong>Персонал з сан. обробки</strong> (мийник / оператор)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Етап 1 -->
+        <div class="step">
+            <div class="step-title">
+                1. Наповнення та ізоляція ємностей
+                <span class="performers">Вик: Механік, Персонал з сан. обробки</span>
+            </div>
+            <ul>
+                <li><strong>Набір води:</strong> Набрати рівно по <strong>4000 л (4 тонни)</strong> чистої води в кожен бак.</li>
+                <li><strong>Ізоляція системи (Механік):</strong> 
+                    <ul>
+                        <li>Перекрити подачу води зі станції ХВО в баки.</li>
+                        <li>Обов'язково перекрити подачу з баків на підвищуючі насоси, щоб уникнути потрапляння хімії в магістраль.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Етап 2 -->
+        <div class="step">
+            <div class="step-title">
+                2. Замочування дезінфектантом (Гіпохлорит)
+                <span class="performers">Вик: Контролер якості</span>
+            </div>
+            
+            <div class="warning-box">
+                ⚠️ УВАГА! Робота з хімічними речовинами. <br>
+                Обов’язково використовувати ЗІЗ (захисні рукавички, окуляри, фартух).
+            </div>
+
+            <div class="sub-step">
+                <span class="sub-step-title">Дозування та внесення:</span>
+                <ul>
+                    <li>Додати гіпохлорит натрію з розрахунку <strong>0,2–0,5 л на 1000 л води</strong>.</li>
+                    <li><strong>Розрахунок на 1 бак (4000 л):</strong> Залити <strong>0,8–2,0 л</strong> гіпохлориту безпосередньо у воду.</li>
+                    <li>Залишити розчин у баках рівно на <strong>12 годин</strong> для ефективної дезінфекції та відмочування стійких забруднень.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Етап 3 -->
+        <div class="step">
+            <div class="step-title">
+                3. Злив та механічне миття
+                <span class="performers">Вик: Механік цеху, Персонал з сан. обробки</span>
+            </div>
+            <ul>
+                <li><strong>Первинний злив:</strong> Через 12 годин експозиції злити брудну воду з баків безпосередньо в каналізацію.</li>
+                <li><strong>Миття високого тиску:</strong> За допомогою мийки високого тиску потужно збити весь бруд зі стінок та криші ємностей зсередини.</li>
+                <li><strong>Повторний злив (Механік):</strong> Забезпечити повний злив утвореної після механічного миття брудної води та залишків осаду в каналізацію.</li>
+            </ul>
+        </div>
+
+        <!-- Етап 4 -->
+        <div class="step">
+            <div class="step-title">
+                4. Дезінфекція засобом «НУК ДЕЗ»
+                <span class="performers">Вик: Персонал з сан. обробки</span>
+            </div>
+            
+            <div class="sub-step">
+                <span class="sub-step-title">Приготування розчину:</span>
+                <p>Приготувати робочий розчин «НУК ДЕЗ» з концентрацією <strong>0,1–0,3%</strong> (від 1 до 3 мл концентрату на 1 літр води).</p>
+            </div>
+
+            <div class="sub-step">
+                <span class="sub-step-title">Внутрішня обробка баків:</span>
+                <p>Ретельно продезінфікувати стінки, дно та кришу ємностей зсередини приготовленим робочим розчином НУК ДЕЗ за допомогою розпилювача.</p>
+            </div>
+
+            <div class="sub-step">
+                <span class="sub-step-title">Миття деталей:</span>
+                <ul>
+                    <li>Зняти люк та поплавки з кожної ємності.</li>
+                    <li>У окремій тарі з розчином НУК ДЕЗ (0,1–0,3%) промити деталі вручну за допомогою щітки.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Етап 5 -->
+        <div class="step">
+            <div class="step-title">
+                5. Контроль якості миття
+                <span class="performers">Вик: Контролер якості</span>
+            </div>
+            <ul>
+                <li>Провести ретельну візуальну перевірку чистоти внутрішніх поверхонь обох ємностей (стінки, дно, криша).</li>
+                <li>Окремо перевірити якість очищення знятих люка та поплавків.</li>
+                <li><strong>У разі виявлення залишків бруду — направити ємність/деталь на повторне домивання.</strong></li>
+            </ul>
+        </div>
+
+        <!-- Етап 6 -->
+        <div class="step">
+            <div class="step-title">
+                6. Збірка та фінальне ополіскування
+                <span class="performers">Вик: Механік цеху, Персонал з сан. обробки</span>
+            </div>
+            <ul>
+                <li><strong>Збірка:</strong> Після підтвердження якості миття контролером, установити люк та поплавки на їхні штатні місця в баках.</li>
+                <li><strong>Набір води:</strong> Включити подачу води в систему та набрати по <strong>1000 літрів</strong> у кожну ємність.</li>
+                <li><strong>Промивка системи:</strong> Повністю злити ці 1000 літрів води через лінію <strong>ВК-3</strong> для фінального вимивання магістралі та баків від залишків дезінфектанту.</li>
+            </ul>
+        </div>
+
+        <!-- Етап 7 -->
+        <div class="step">
+            <div class="step-title">
+                7. Завершення робіт та пуск
+            </div>
+            <ul>
+                <li>Переконатись, що вода повністю злита та відсутній специфічний запах хімії (оцту/хлору).</li>
+                <li>Після виконання фінального зливу через ВК-3 санітарна обробка вважається повністю завершеною.</li>
+                <li><strong>Можна розпочинати виробничий процес.</strong></li>
+            </ul>
+        </div>
+
+        <!-- Підписи -->
+        <table class="signatures">
+            <thead>
+                <tr>
+                    <th colspan="2" style="text-align: center; background-color: #eee;">Лист ознайомлення з інструкцією</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Контролер якості</strong></td>
+                    <td>Підпис: _____________________</td>
+                </tr>
+                <tr>
+                    <td><strong>Механік цеху</strong></td>
+                    <td>Підпис: _____________________</td>
+                </tr>
+                <tr>
+                    <td><strong>Персонал з сан. обробки 1</strong></td>
+                    <td>Підпис: _____________________</td>
+                </tr>
+                <tr>
+                    <td><strong>Персонал з сан. обробки 2</strong></td>
+                    <td>Підпис: _____________________</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="date-block">
+            Дата: «___» ____________ 2026 р.
+        </div>
+
+    </div>
+</body>
+</html>
